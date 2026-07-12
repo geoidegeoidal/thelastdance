@@ -1,0 +1,25 @@
+{
+  "name": "thelastdance",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "homepage": "https://geoidegeoidal.github.io/thelastdance/",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "vite": "^8.1.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "phaser": "^3.90.0"
+  }
+}

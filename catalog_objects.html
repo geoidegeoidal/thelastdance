@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Objetos - Modo Selección</title>
+    <style>
+        body { font-family: sans-serif; background: #1e1e2e; color: #cdd6f4; padding: 20px; }
+        h1 { color: #89b4fa; }
+        .canvas-container { margin-bottom: 40px; background: #313244; padding: 20px; border-radius: 8px; display: inline-block; }
+        canvas { background: #181825; image-rendering: pixelated; border: 1px solid #45475a; }
+        p { max-width: 800px; line-height: 1.5; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
+        .card { background: #181825; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #45475a; }
+        .card img { max-width: 100%; image-rendering: pixelated; margin-bottom: 10px; }
+        .card span { display: block; font-weight: bold; font-size: 1.1em; color: yellow; }
+    </style>
+</head>
+<body>
+    <h1>Catálogo Detallado (Con IDs)</h1>
+    <p>He añadido todas las carpetas que me dejaste, incluyendo los materiales especiales para los gatos y los iconos de Retro World. <br>Por favor, dime el nombre de la sección/hoja y el número que quieres para (1) El disparador de gatos y (2) Las cartas.</p>
+
+    <!-- OBJETOS ESPECIFICOS PARA GATOS -->
+    <div class="canvas-container" style="display: block; max-width: 1000px;">
+        <h2>Materiales para Gatos (cats_materials)</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="/assets/cats_materials/CatBowls.png" alt="Platos">
+                <span>ID: CatBowls</span>
+            </div>
+            <div class="card">
+                <img src="/assets/cats_materials/CatBedBlue.png" alt="Cama">
+                <span>ID: CatBed</span>
+            </div>
+            <div class="card">
+                <img src="/assets/cats_materials/BlueBall-Sheet.png" alt="Bola Azul">
+                <span>ID: BlueBall</span>
+            </div>
+            <div class="card">
+                <img src="/assets/cats_materials/Mouse-Sheet.png" alt="Ratón">
+                <span>ID: Mouse</span>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <!-- ICONOS Y COFRES -->
+    <div class="canvas-container">
+        <h2>Iconos Varios (SuperRetroWorld)</h2>
+        <p>Cuadrícula de 16x16</p>
+        <canvas id="canvas-icons1"></canvas>
+    </div>
+    
+    <div class="canvas-container">
+        <h2>Cofres (SuperRetroWorld)</h2>
+        <p>Cuadrícula de 16x16</p>
+        <canvas id="canvas-chests"></canvas>
+    </div>
+
+    <br>
+
+    <!-- OBJETOS ORIGINALES DEL PLATFORMER -->
+    <div class="canvas-container">
+        <h2>Items del Platformer (items_.png)</h2>
+        <p>Cuadrícula de 16x16</p>
+        <canvas id="canvas-items"></canvas>
+    </div>
+    
+    <br>
+
+    <div class="canvas-container">
+        <h2>Bloques de Evento (eventBlock_.png)</h2>
+        <p>Cuadrícula de 16x16</p>
+        <canvas id="canvas-events"></canvas>
+    </div>
+
+    <br>
+
+    <div class="canvas-container">
+        <h2>Objetos Estáticos (staticObjects_.png)</h2>
+        <p>Cuadrícula de 16x16</p>
+        <canvas id="canvas-static"></canvas>
+    </div>
+
+    <script>
+        const scale = 2; // Escala global
+
+        function drawGrid(canvasId, imageSrc, tileSize) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            img.src = imageSrc;
+            
+            img.onload = () => {
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                
+                ctx.imageSmoothingEnabled = false;
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                
+                const cols = Math.floor(img.width / tileSize);
+                const rows = Math.floor(img.height / tileSize);
+                
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.lineWidth = 1;
+                ctx.fillStyle = 'yellow';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                let id = 1;
+                for (let y = 0; y < rows; y++) {
+                    for (let x = 0; x < cols; x++) {
+                        const px = x * tileSize * scale;
+                        const py = y * tileSize * scale;
+                        
+                        // Cuadrícula
+                        ctx.strokeRect(px, py, tileSize * scale, tileSize * scale);
+                        
+                        // ID del tile
+                        ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                        ctx.fillRect(px + (tileSize*scale)/2 - 10, py + (tileSize*scale)/2 - 7, 20, 14);
+                        
+                        ctx.fillStyle = 'yellow';
+                        ctx.fillText(id, px + (tileSize * scale) / 2, py + (tileSize * scale) / 2);
+                        
+                        id++;
+                    }
+                }
+            };
+        }
+
+        const platformerPath = "/assets/tilesets/fourSeasonsPlatformer_ [tileset, version 2.0]/objects_/";
+        drawGrid('canvas-items', platformerPath + 'items_.png', 16);
+        drawGrid('canvas-events', platformerPath + 'eventBlock_.png', 16);
+        drawGrid('canvas-static', platformerPath + 'staticObjects_.png', 16);
+        
+        const retroPath = "/assets/characters/SuperRetroWorld_CharacterPack_Full/rpgmaker/MV/characters/";
+        drawGrid('canvas-icons1', retroPath + '$_srw_free_icons1.png', 48);
+        drawGrid('canvas-chests', retroPath + '_srw_free_chests.png', 48);
+    </script>
+</body>
+</html>

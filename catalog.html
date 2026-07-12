@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Catálogo Animado</title>
+    <style>
+        body { font-family: sans-serif; background: #1e1e2e; color: #cdd6f4; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .card { background: #313244; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .card img { width: 128px; height: 128px; image-rendering: pixelated; margin-bottom: 10px; }
+        .card span { display: block; font-weight: bold; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <h1>Catálogo de Personajes (Pack de Animación)</h1>
+    <p>Este es el nuevo pack que subiste. He extraído los frames iniciales de cada personaje femenino con sus distintas ropas.</p>
+    <div class="grid" id="catalog"></div>
+    <script>
+        const catalog = document.getElementById('catalog');
+        const basePath = "/assets/characters/mp_character_animation/mp_character_animation_asset_pack_v1.0/Exported PNGs/Female";
+        
+        const characters = [1, 2, 3];
+        const clothes = [1, 2, 3];
+
+        characters.forEach(c => {
+            clothes.forEach(cl => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${basePath}/Character ${c}/Clothes ${cl}/Character${c}F_${cl}_idle_0.png" alt="Personaje ${c} Ropa ${cl}">
+                    <span>Personaje ${c}<br>Ropa ${cl}</span>
+                `;
+                catalog.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

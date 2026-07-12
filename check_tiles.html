@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Foreground Tiles</title>
+</head>
+<body style="background: #333; color: white;">
+    <h1>Foreground Tiles</h1>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.src = "/assets/tilesets/fourSeasonsPlatformer_ [tileset, version 2.0]/background_/sky_.png";
+        
+        img.onload = () => {
+            const scale = 4;
+            const tileSize = 16;
+            canvas.width = img.width * scale;
+            canvas.height = img.height * scale;
+            
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = 'yellow';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            let id = 0;
+            const cols = img.width / tileSize;
+            const rows = img.height / tileSize;
+            
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    const px = x * tileSize * scale;
+                    const py = y * tileSize * scale;
+                    
+                    ctx.strokeRect(px, py, tileSize * scale, tileSize * scale);
+                    ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                    ctx.fillRect(px + (tileSize*scale)/2 - 12, py + (tileSize*scale)/2 - 10, 24, 20);
+                    ctx.fillStyle = 'yellow';
+                    ctx.fillText(id, px + (tileSize * scale) / 2, py + (tileSize * scale) / 2);
+                    id++;
+                }
+            }
+        };
+    </script>
+</body>
+</html>
