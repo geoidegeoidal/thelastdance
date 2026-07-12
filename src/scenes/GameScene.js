@@ -145,10 +145,18 @@ export default class GameScene extends Phaser.Scene {
     this.chestsGroup = this.physics.add.staticGroup();
     const cartasLayer = map.getObjectLayer('Cartas');
     if (cartasLayer && cartasLayer.objects) {
+        let maxChestX = -1;
+        cartasLayer.objects.forEach(obj => {
+            if (obj.x > maxChestX) maxChestX = obj.x;
+        });
+
         cartasLayer.objects.forEach(obj => {
             const frame = obj.gid ? obj.gid - 309 : 109;
             const chest = this.chestsGroup.create(obj.x + 8, obj.y - 8, 'Decoraciones_sprites', frame);
             chest.body.setSize(16, 16);
+            if (obj.x === maxChestX) {
+                chest.isFinalChest = true;
+            }
         });
     }
     // NOTA: La colisión e interacción del cofre ahora se revisa en el update() para que no falle.
@@ -319,8 +327,14 @@ export default class GameScene extends Phaser.Scene {
           "Y si algo te puedo dejar para estos días, que sea la música que en el cotidiano de la ciudad, me hace recordarte a ti."
       ];
       
-      const isLastLetter = (this.lettersFound === letterTexts.length - 1);
-      const textToShow = letterTexts[this.lettersFound % letterTexts.length];
+      const isLastLetter = (this.currentChest && this.currentChest.isFinalChest) || (this.lettersFound === letterTexts.length - 1);
+      
+      let textToShow;
+      if (isLastLetter) {
+          textToShow = letterTexts[letterTexts.length - 1]; // Siempre el último texto
+      } else {
+          textToShow = letterTexts[this.lettersFound % (letterTexts.length - 1)]; // Ciclamos en los textos normales
+      }
       this.lettersFound++;
 
       this.letterText = this.add.text(-w/2 + 30, -h/2 + 90, '', {
