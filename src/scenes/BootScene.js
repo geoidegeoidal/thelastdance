@@ -20,13 +20,13 @@ export default class BootScene extends Phaser.Scene {
       this.load.spritesheet('cat_tuxedo_idle', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/BatmanCatFree/IdleCatt.png', { frameWidth: 32, frameHeight: 32 });
       this.load.spritesheet('cat_tuxedo_run', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/BatmanCatFree/JumpCattt.png', { frameWidth: 32, frameHeight: 32 });
       
-      // Cat 2: Carey 1 (Tiger)
-      this.load.spritesheet('cat_carey_idle', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/TigerCatFree/IdleCatt.png', { frameWidth: 32, frameHeight: 32 });
-      this.load.spritesheet('cat_carey_run', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/TigerCatFree/JumpCattt.png', { frameWidth: 32, frameHeight: 32 });
+      // Cat 2: Carey 1 (BlackCat)
+      this.load.spritesheet('cat_carey_idle', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/BlackCat/IdleCatb.png', { frameWidth: 32, frameHeight: 32 });
+      this.load.spritesheet('cat_carey_run', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/BlackCat/JumpCabt.png', { frameWidth: 32, frameHeight: 32 });
       
-      // Cat 3: Carey 2 (Brown)
-      this.load.spritesheet('cat_carey2_idle', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/Brown/IdleCattt.png', { frameWidth: 32, frameHeight: 32 });
-      this.load.spritesheet('cat_carey2_run', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/Brown/JumpCatttt.png', { frameWidth: 32, frameHeight: 32 });
+      // Cat 3: Carey 2 (BlackCat)
+      this.load.spritesheet('cat_carey2_idle', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/BlackCat/IdleCatb.png', { frameWidth: 32, frameHeight: 32 });
+      this.load.spritesheet('cat_carey2_run', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/BlackCat/JumpCabt.png', { frameWidth: 32, frameHeight: 32 });
       
       // Cat 4: Calico (ThreeColor)
       this.load.spritesheet('cat_calico_idle', import.meta.env.BASE_URL + 'assets/cats/AllCatsDemo/ThreeColorFree/IdleCatt.png', { frameWidth: 32, frameHeight: 32 });
