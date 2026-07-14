@@ -295,8 +295,8 @@ export default class GameScene extends Phaser.Scene {
       this.letterContainer.setAlpha(0);
 
       // Dimensiones de la carta (Formato retrato, más larga)
-      const w = 320;
-      const h = 460;
+      const w = 480;
+      const h = 640;
 
       // Sombra
       const shadow = this.add.rectangle(8, 12, w, h, 0x000000, 0.4);
@@ -318,13 +318,13 @@ export default class GameScene extends Phaser.Scene {
 
       // Textos dinámicos para cada cofre
       const letterTexts = [
-          "Hola amor, sé que a veces sientes que el peso es mucho, pero confía en ti.",
-          "Cada paso que das en este viaje cuenta, incluso los más pequeños.",
-          "No olvides respirar. Yo estoy aquí, apoyándote en todo lo que logras.",
-          "Eres más fuerte de lo que crees. Sigue adelante.",
-          "Estos gatitos te acompañan, igual que mis pensamientos positivos.",
-          "Ya falta poco. Sé que puedes superar esto y más.",
-          "Y si algo te puedo dejar para estos días, que sea la música que en el cotidiano de la ciudad, me hace recordarte a ti."
+          "Hola:\n\nSé que quizás pienses que habito en la calma, pero no es así. Soy un mapa en blanco, un paisaje despojado de su territorio, midiendo las distancias del día en canciones que me devuelven a ti.",
+          "Trato de sacarle brillo a esta casa que de pronto se volvió un no-lugar. Paso un paño por los muebles y despierto a los fantasmas de tu rutina: adivino la huella de tu paso, escucho tus pies descalzos cruzando el pasillo, el murmullo del televisor, el silbido del hervidor preparando tu décimo té del día. Todo parece dispuesto para ti, pero la casa está vacía.",
+          "Los gatos aún se acurrucan buscando un calor que se esfumó, y las sábanas guardan una tibieza engañosa por un rato. A veces, la inercia me traiciona y pienso en qué prepararte de almuerzo. Pero la cocina es otro mapa vacío. Ya no hay apuro por ganarle a la mañana en la feria del domingo, ni me esfuerzo en inventar chistes fomes solo por el premio de verte sonreír. Tú, que de tantas penas me hablabas; yo, que siempre supe que te reías de puro amor.",
+          "Extraño arreglar el mundo contigo los miércoles por la noche. Extraño los goles de Alexis en el Arsenal de fondo mientras te quedabas dormida; extraño escucharte relatar las revoluciones de tu día, tu sed de justicia social y ese amor inmenso que hoy no sé dónde habita, extraño la pedagogía de la ternura, a Freire tatuado en tu piel. Me pregunto si tú me extrañas como yo te extraño a ti. Me pregunto si a veces te ríes de mis chistes malos cuando me cruzo en tu mente, aunque me hayas negado y, sin querer —quiero creerlo—, me desplazaste de tu vida. Sigo caminando hacia el living esperando mirarte, pero no estás tú.",
+          "Si la paz mental era este silencio, si esta era la calma burocrática que al fin debía llegar, no considero justo el precio. Y aunque hoy no puedo ofrecer más que palabras, te sigo sintiendo a mi espalda, observando cómo le hablo a las máquinas. Al menos ellas sí me hicieron caso. Recuperé mi lado de esta cama que ahora es un continente helado; ya no hay quien me destape en la madrugada, ni resuena la misma canción en bucle desde tu teléfono. Ya no estás tú.",
+          "Tengo una profunda nostalgia por lo que no alcanzó a ser. Por los gatos que no trajimos, por los viajes que se quedaron en el tintero, por el miedo a envejecer juntos y por la paciencia de ver cómo el tiempo nos dibujaba arrugas. Dicen que a veces el amor no alcanza, que los senderos se bifurcan y que al final del día solo nos salvan los buenos recuerdos. Quiero creer en eso. Tanto como quiero creer que alguna vez, de verdad, me amaste. Que fui lugar en tu tiempo.",
+          "Si algo te puedo dejar, que sea la música. Una banda sonora para los espacios que dejamos de llenar."
       ];
       
       const isLastLetter = (this.currentChest && this.currentChest.isFinalChest) || (this.lettersFound === letterTexts.length - 1);
@@ -337,12 +337,12 @@ export default class GameScene extends Phaser.Scene {
       }
       this.lettersFound++;
 
-      this.letterText = this.add.text(-w/2 + 30, -h/2 + 90, '', {
+      this.letterText = this.add.text(-w/2 + 40, -h/2 + 90, '', {
           fontFamily: '"Press Start 2P"',
-          fontSize: '10px',
+          fontSize: '11px',
           fill: '#3a2311', // Tinta oscura
           lineSpacing: 14,
-          wordWrap: { width: w - 60 }
+          wordWrap: { width: w - 80 }
       });
 
       const promptText = this.add.text(0, h/2 - 25, "Presiona ENTER o Clic para cerrar", {
